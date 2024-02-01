@@ -1,8 +1,9 @@
 package vm
 
-import "monkey/object"
-
-const MaxFrames = 1024
+import (
+	"monkey/code"
+	"monkey/object"
+)
 
 type Frame struct {
 	fn          *object.CompiledFunction
@@ -17,4 +18,8 @@ func NewFrame(fn *object.CompiledFunction, basePointer int) *Frame {
 		basePointer: basePointer,
 	}
 	return f
+}
+
+func (f *Frame) Instructions() code.Instructions {
+	return f.fn.Instructions
 }
